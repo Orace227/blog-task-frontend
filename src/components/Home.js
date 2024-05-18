@@ -15,7 +15,7 @@ const Home = () => {
 
         const allBlogs = response.data?.blogs?.map((blog) => ({
           ...blog,
-          blogImageUrl: `https://blog-test-backend.onrender.com/api/v1/blog${blog.blogImageUrl?.replace(
+          blogImageUrl: `https://blog-test-backend.onrender.com/api/v1/blog/${blog.blogImageUrl?.replace(
             "\\",
             "/"
           )}`,
