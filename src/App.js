@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet,
+} from "react-router-dom";
+import NotFound from "./components/NotFound";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./components/Home";
+import axios from "axios";
+import BlogDetails from "./components/blog/BlogDetails";
+import CreateBlog from "./components/blog/CreateBlog";
 
-function App() {
+const App = () => {
+  axios.defaults.baseURL = process.env.REACT_APP_AXIOS_URL;
+  axios.defaults.withCredentials = true;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<LayoutsWithHeader />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/CreateBlog" element={<CreateBlog />} />
+            <Route path="/blog/:slug" element={<BlogDetails />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
+
+const LayoutsWithHeader = () => {
+  return (
+    <>
+      <Header />
+      <Outlet />
+      <Footer />
+    </>
+  );
+};
 
 export default App;
