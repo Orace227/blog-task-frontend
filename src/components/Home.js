@@ -11,9 +11,9 @@ const Home = () => {
       setLoading(true);
       try {
         const response = await axios.get(`/blog/getBlogs`);
-        console.log(response.data.blogs);
+        console.log(response);
 
-        const allBlogs = response.data.blogs.map((blog) => ({
+        const allBlogs = response.data?.blogs?.map((blog) => ({
           ...blog,
           blogImageUrl: `${
             process.env.REACT_APP_AXIOS_URL
