@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import ShowBlogs from "./ShowBLogs";
 import { useBlogs } from "../hooks/useBlog";
+import toast, { Toaster } from "react-hot-toast";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -22,6 +23,7 @@ const Home = () => {
         }));
 
         console.log("allBlogs", allBlogs);
+        toast.success("All blogs are retrieved successfully!");
         setBlogs(allBlogs);
       } catch (error) {
         console.error("Error fetching blogs:", error);
@@ -35,6 +37,7 @@ const Home = () => {
 
   return (
     <div className="container mx-auto">
+      <Toaster />
       {loading ? (
         <div className="flex justify-center items-center h-screen">
           <h2 className="text-xl font-semibold text-gray-800">Loading...</h2>

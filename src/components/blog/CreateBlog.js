@@ -12,14 +12,26 @@ import * as Yup from "yup";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const blogValidationSchema = Yup.object().shape({
   slug: Yup.string()
     .required("Slug is required")
     .matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug must be URL-friendly")
     .test("unique", "Slug must be unique", async (value) => {
-      // You need to implement a check here to see if the slug is unique
-      return true; // replace with your actual logic
+      try {
+        const slugExist = await axios.get(
+          `/blog/checkSlugAvailable?slug=${value}`
+        );
+        console.log(slugExist);
+        if (slugExist.status === 200) {
+          return true;
+        } else {
+          return false;
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }),
   title: Yup.string().required("Title is required"),
   content: Yup.string().required("Content is required"),
@@ -44,6 +56,7 @@ const uploadBlogImage = async (image) => {
     const formData = new FormData();
     formData.append("bannerImage", image);
     const uploadedImage = await axios.post("/blog/uploadBlogImage", formData);
+    toast.success("Image uploaded successfully!");
     // console.log(uploadedImage);
     return uploadedImage.data.path;
   } catch (error) {
@@ -66,6 +79,7 @@ const CreateBlog = () => {
         body.blogImageUrl = blogImagePath;
         const createBlog = await axios.post("/blog/createBlog", body);
         console.log(createBlog);
+        toast.success("Blog is created successfully!");
         navigate("/"); // Redirect to home page
       }
     } catch (error) {
@@ -77,6 +91,7 @@ const CreateBlog = () => {
 
   return (
     <Container>
+      <Toaster />
       <Typography variant="h4" gutterBottom>
         Create Blog
       </Typography>

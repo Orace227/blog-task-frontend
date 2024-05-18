@@ -70,12 +70,15 @@ function BlogDetails() {
 
   const handleDelete = async () => {
     try {
-      const body = { blogIdArr: [`${blogDetails.blogId}`] };
-      const deletedBlog = await axios.post("/blog/deleteBlogs", body);
-      if (deletedBlog.status === 200) {
-        // console.log(deletedBlog);
-        toast.success("Blog deleted successfully!");
-        navigate("/");
+      const yes = window.confirm("Are you sure you want to delete this blog?");
+      if (yes) {
+        const body = { blogIdArr: [`${blogDetails.blogId}`] };
+        const deletedBlog = await axios.post("/blog/deleteBlogs", body);
+        if (deletedBlog.status === 200) {
+          // console.log(deletedBlog);
+          toast.success("Blog deleted successfully!");
+          navigate("/");
+        }
       }
     } catch (error) {
       console.log(error);
@@ -85,11 +88,7 @@ function BlogDetails() {
   const blogValidationSchema = Yup.object().shape({
     slug: Yup.string()
       .required("Slug is required")
-      .matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug must be URL-friendly")
-      .test("unique", "Slug must be unique", async (value) => {
-        // You need to implement a check here to see if the slug is unique
-        return true; // replace with your actual logic
-      }),
+      .matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug must be URL-friendly"),
     title: Yup.string().required("Title is required"),
     content: Yup.string().required("Content is required"),
     author: Yup.string().required("Author is required"),

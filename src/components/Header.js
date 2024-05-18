@@ -20,11 +20,6 @@ const Header = () => {
                 Create Blog
               </Link>
             </li>
-            <li>
-              <Link to="#" className="hover:text-gray-300">
-                Contact
-              </Link>
-            </li>
           </ul>
         </nav>
       </div>

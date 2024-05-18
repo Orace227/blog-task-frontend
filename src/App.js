@@ -14,6 +14,7 @@ import CreateBlog from "./components/blog/CreateBlog";
 
 const App = () => {
   axios.defaults.baseURL = "https://blog-test-backend.onrender.com/api/v1";
+  // axios.defaults.baseURL = "http://localhost:8000/api/v1";
   axios.defaults.withCredentials = true;
   return (
     <Router>
