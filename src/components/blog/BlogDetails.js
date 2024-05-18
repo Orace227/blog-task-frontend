@@ -107,7 +107,7 @@ function BlogDetails() {
       const updateBlog = await axios.post("/blog/updateBlog", body);
       console.log(updateBlog);
       setLoading(false);
-      setShowModal(false);
+      setShowModal(!showModal);
     } catch (error) {
     } finally {
       setLoading(false);
