@@ -17,7 +17,7 @@ const Home = () => {
           ...blog,
           blogImageUrl: `${
             process.env.REACT_APP_AXIOS_URL
-          }/blog/${blog.blogImageUrl.replace("\\", "/")}`,
+          }/blog/${blog.blogImageUrl?.replace("\\", "/")}`,
         }));
 
         console.log("allBlogs", allBlogs);

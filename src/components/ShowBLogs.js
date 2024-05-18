@@ -27,14 +27,14 @@ const ShowBlogs = ({ blogs }) => {
 
   return (
     <div className=" mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      {blogs.length !== 0 ? (
-        blogs.map((blog) => (
-          <Link to={`/blog/${blog.slug}`} key={blog.blogId}>
+      {blogs?.length !== 0 ? (
+        blogs?.map((blog) => (
+          <Link to={`/blog/${blog?.slug}`} key={blog?.blogId}>
             <div className=" rounded-lg overflow-hidden hover:shadow-lg border">
               <img
                 className="w-full h-48 object-cover"
-                src={ blog.blogImageUrl}
-                alt={blog.title}
+                src={blog?.blogImageUrl}
+                alt={blog?.title}
               />
               <div className="px-6 py-4">
                 <h5 className="text-xl font-semibold text-gray-900 mb-2 truncate">
