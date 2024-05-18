@@ -57,9 +57,10 @@ function BlogDetails() {
 
         const blog = await response.data.blogs.map((blog) => ({
           ...blog,
-          blogImageUrl: `${
-            process.env.REACT_APP_AXIOS_URL
-          }/blog/${blog.blogImageUrl.replace("\\", "/")}`,
+          blogImageUrl: `https://blog-test-backend.onrender.com/api/v1/blog/${blog.blogImageUrl.replace(
+            "\\",
+            "/"
+          )}`,
         }));
         setBlogDetails(blog[0]);
       }

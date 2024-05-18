@@ -13,7 +13,7 @@ import BlogDetails from "./components/blog/BlogDetails";
 import CreateBlog from "./components/blog/CreateBlog";
 
 const App = () => {
-  axios.defaults.baseURL = process.env.REACT_APP_AXIOS_URL;
+  axios.defaults.baseURL = "https://blog-test-backend.onrender.com/api/v1";
   axios.defaults.withCredentials = true;
   return (
     <Router>
